@@ -1,0 +1,25 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: openupgradelib documentation
+
+on:
+  push:
+    branches: ["gh-actions"]
+  pull_request:
+
+jobs:
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - uses: actions/checkout@v2
+      - name: Configuration
+        run: |
+          pip install -q sphinx
+      - name: openupgradelib docs
+        run: |
+          pip install -q sphinx; sh ~/openupgrade/scripts/build_openupgrade_docs
